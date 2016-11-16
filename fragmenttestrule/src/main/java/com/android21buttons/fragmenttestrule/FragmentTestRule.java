@@ -6,27 +6,43 @@ import android.util.Log;
 
 /**
  * This rule provides functional testing of a single fragment.
- *
+ * <p>
  * Idea extracted from: http://stackoverflow.com/a/38393087/842697
  *
  * @param <F> the Fragment to test
  */
-public class FragmentTestRule<F extends Fragment> extends ActivityTestRule<TestActivity> {
+public class FragmentTestRule<A extends TestActivity, F extends Fragment> extends ActivityTestRule<A> {
     private static final String TAG = "FragmentTestRule";
 
     private final Class<F> fragmentClass;
     private F fragment;
 
-    public FragmentTestRule(Class<F> fragmentClass) {
-        this(fragmentClass, false);
+    public static <F extends Fragment> FragmentTestRule<TestActivity, F> create(Class<F> fragmentClass) {
+        return create(TestActivity.class, fragmentClass);
     }
 
-    public FragmentTestRule(Class<F> fragmentClass, boolean initialTouchMode) {
-        this(fragmentClass, initialTouchMode, true);
+    public static <F extends Fragment> FragmentTestRule<TestActivity, F> create(Class<F> fragmentClass, boolean initialTouchMode) {
+        return create(TestActivity.class, fragmentClass, initialTouchMode);
     }
 
-    public FragmentTestRule(Class<F> fragmentClass, boolean initialTouchMode, boolean launchActivity) {
-        super(TestActivity.class, initialTouchMode, launchActivity);
+    public static <F extends Fragment> FragmentTestRule<TestActivity, F> create(Class<F> fragmentClass, boolean initialTouchMode, boolean launchActivity) {
+        return create(TestActivity.class, fragmentClass, initialTouchMode, launchActivity);
+    }
+
+    public static <A extends TestActivity, F extends Fragment> FragmentTestRule<A, F> create(Class<A> activityClass, Class<F> fragmentClass) {
+        return create(activityClass, fragmentClass, false);
+    }
+
+    public static <A extends TestActivity, F extends Fragment> FragmentTestRule<A, F> create(Class<A> activityClass, Class<F> fragmentClass, boolean initialTouchMode) {
+        return create(activityClass, fragmentClass, initialTouchMode, true);
+    }
+
+    public static <A extends TestActivity, F extends Fragment> FragmentTestRule<A, F> create(Class<A> activityClass, Class<F> fragmentClass, boolean initialTouchMode, boolean launchActivity) {
+        return new FragmentTestRule<>(activityClass, fragmentClass, initialTouchMode, launchActivity);
+    }
+
+    protected FragmentTestRule(Class<A> activityClass, Class<F> fragmentClass, boolean initialTouchMode, boolean launchActivity) {
+        super(activityClass, initialTouchMode, launchActivity);
         this.fragmentClass = fragmentClass;
     }
 
@@ -37,32 +53,30 @@ public class FragmentTestRule<F extends Fragment> extends ActivityTestRule<TestA
             public void run() {
                 FragmentTestRule.this.fragment = createFragment();
                 getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragmentTestRule_fForFragment, fragment)
-                    .commit();
+                        .beginTransaction()
+                        .replace(R.id.fragmentTestRule_fForFragment, fragment)
+                        .commit();
             }
         });
     }
 
-    @SuppressWarnings("unchecked")
     protected F createFragment() {
         try {
-            return (F) fragmentClass.newInstance();
+            return fragmentClass.newInstance();
         } catch (InstantiationException e) {
             throw new AssertionError(String.format("%s: Could not insert %s into %s: %s",
-                getClass().getSimpleName(),
-                fragmentClass.getSimpleName(),
-                TestActivity.class.getSimpleName(),
-                e.getMessage()));
+                    getClass().getSimpleName(),
+                    fragmentClass.getSimpleName(),
+                    TestActivity.class.getSimpleName(),
+                    e.getMessage()));
         } catch (IllegalAccessException e) {
             throw new AssertionError(String.format("%s: Could not insert %s into %s: %s",
-                getClass().getSimpleName(),
-                fragmentClass.getSimpleName(),
-                TestActivity.class.getSimpleName(),
-                e.getMessage()));
+                    getClass().getSimpleName(),
+                    fragmentClass.getSimpleName(),
+                    TestActivity.class.getSimpleName(),
+                    e.getMessage()));
         }
     }
-
 
     public F getFragment() {
         if (fragment == null) {

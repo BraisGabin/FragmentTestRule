@@ -67,13 +67,13 @@ public class FragmentTestRule<A extends TestActivity, F extends Fragment> extend
             throw new AssertionError(String.format("%s: Could not insert %s into %s: %s",
                     getClass().getSimpleName(),
                     fragmentClass.getSimpleName(),
-                    TestActivity.class.getSimpleName(),
+                    getActivity().getClass().getSimpleName(),
                     e.getMessage()));
         } catch (IllegalAccessException e) {
             throw new AssertionError(String.format("%s: Could not insert %s into %s: %s",
                     getClass().getSimpleName(),
                     fragmentClass.getSimpleName(),
-                    TestActivity.class.getSimpleName(),
+                    getActivity().getClass().getSimpleName(),
                     e.getMessage()));
         }
     }

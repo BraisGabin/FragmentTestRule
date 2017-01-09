@@ -9,7 +9,8 @@ import android.util.Log;
  * <p>
  * Idea extracted from: http://stackoverflow.com/a/38393087/842697
  *
- * @param <F> the Fragment to test
+ * @param <A> The activity where the fragment will be added
+ * @param <F> The fragment to test
  */
 public class FragmentTestRule<A extends TestActivity, F extends Fragment> extends ActivityTestRule<A> {
     private static final String TAG = "FragmentTestRule";

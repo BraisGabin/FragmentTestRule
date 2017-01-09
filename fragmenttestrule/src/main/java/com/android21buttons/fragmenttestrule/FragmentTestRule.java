@@ -18,28 +18,24 @@ public class FragmentTestRule<A extends TestActivity, F extends Fragment> extend
     private final Class<F> fragmentClass;
     private F fragment;
 
-    public static <F extends Fragment> FragmentTestRule<TestActivity, F> create(Class<F> fragmentClass) {
-        return create(TestActivity.class, fragmentClass);
+    protected FragmentTestRule(Class<F> fragmentClass) {
+        this((Class<A>) TestActivity.class, fragmentClass);
     }
 
-    public static <F extends Fragment> FragmentTestRule<TestActivity, F> create(Class<F> fragmentClass, boolean initialTouchMode) {
-        return create(TestActivity.class, fragmentClass, initialTouchMode);
+    protected FragmentTestRule(Class<F> fragmentClass, boolean initialTouchMode) {
+        this((Class<A>) TestActivity.class, fragmentClass, initialTouchMode);
     }
 
-    public static <F extends Fragment> FragmentTestRule<TestActivity, F> create(Class<F> fragmentClass, boolean initialTouchMode, boolean launchActivity) {
-        return create(TestActivity.class, fragmentClass, initialTouchMode, launchActivity);
+    protected FragmentTestRule(Class<F> fragmentClass, boolean initialTouchMode, boolean launchActivity) {
+        this((Class<A>) TestActivity.class, fragmentClass, initialTouchMode, launchActivity);
     }
 
-    public static <A extends TestActivity, F extends Fragment> FragmentTestRule<A, F> create(Class<A> activityClass, Class<F> fragmentClass) {
-        return create(activityClass, fragmentClass, false);
+    protected FragmentTestRule(Class<A> activityClass, Class<F> fragmentClass) {
+        this(activityClass, fragmentClass, false);
     }
 
-    public static <A extends TestActivity, F extends Fragment> FragmentTestRule<A, F> create(Class<A> activityClass, Class<F> fragmentClass, boolean initialTouchMode) {
-        return create(activityClass, fragmentClass, initialTouchMode, true);
-    }
-
-    public static <A extends TestActivity, F extends Fragment> FragmentTestRule<A, F> create(Class<A> activityClass, Class<F> fragmentClass, boolean initialTouchMode, boolean launchActivity) {
-        return new FragmentTestRule<>(activityClass, fragmentClass, initialTouchMode, launchActivity);
+    protected FragmentTestRule(Class<A> activityClass, Class<F> fragmentClass, boolean initialTouchMode) {
+        this(activityClass, fragmentClass, initialTouchMode, true);
     }
 
     protected FragmentTestRule(Class<A> activityClass, Class<F> fragmentClass, boolean initialTouchMode, boolean launchActivity) {

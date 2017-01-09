@@ -52,7 +52,7 @@ public class FragmentTestRule<A extends TestActivity, F extends Fragment> extend
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragmentTestRule_fForFragment, fragment)
-                        .commit();
+                        .commitNow();
             }
         });
     }

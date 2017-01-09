@@ -2,6 +2,7 @@ package com.android21buttons.fragmenttestrule;
 
 import android.support.test.rule.ActivityTestRule;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 /**
@@ -12,23 +13,11 @@ import android.util.Log;
  * @param <A> The activity where the fragment will be added
  * @param <F> The fragment to test
  */
-public class FragmentTestRule<A extends TestActivity, F extends Fragment> extends ActivityTestRule<A> {
+public class FragmentTestRule<A extends FragmentActivity, F extends Fragment> extends ActivityTestRule<A> {
     private static final String TAG = "FragmentTestRule";
 
     private final Class<F> fragmentClass;
     private F fragment;
-
-    protected FragmentTestRule(Class<F> fragmentClass) {
-        this((Class<A>) TestActivity.class, fragmentClass);
-    }
-
-    protected FragmentTestRule(Class<F> fragmentClass, boolean initialTouchMode) {
-        this((Class<A>) TestActivity.class, fragmentClass, initialTouchMode);
-    }
-
-    protected FragmentTestRule(Class<F> fragmentClass, boolean initialTouchMode, boolean launchActivity) {
-        this((Class<A>) TestActivity.class, fragmentClass, initialTouchMode, launchActivity);
-    }
 
     protected FragmentTestRule(Class<A> activityClass, Class<F> fragmentClass) {
         this(activityClass, fragmentClass, false);
@@ -51,7 +40,7 @@ public class FragmentTestRule<A extends TestActivity, F extends Fragment> extend
                 FragmentTestRule.this.fragment = createFragment();
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragmentTestRule_fForFragment, fragment)
+                        .replace(android.R.id.content, fragment)
                         .commitNow();
             }
         });

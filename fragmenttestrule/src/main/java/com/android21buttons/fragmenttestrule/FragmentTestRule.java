@@ -19,15 +19,15 @@ public class FragmentTestRule<A extends FragmentActivity, F extends Fragment> ex
     private final Class<F> fragmentClass;
     private F fragment;
 
-    protected FragmentTestRule(Class<A> activityClass, Class<F> fragmentClass) {
+    public FragmentTestRule(Class<A> activityClass, Class<F> fragmentClass) {
         this(activityClass, fragmentClass, false);
     }
 
-    protected FragmentTestRule(Class<A> activityClass, Class<F> fragmentClass, boolean initialTouchMode) {
+    public FragmentTestRule(Class<A> activityClass, Class<F> fragmentClass, boolean initialTouchMode) {
         this(activityClass, fragmentClass, initialTouchMode, true);
     }
 
-    protected FragmentTestRule(Class<A> activityClass, Class<F> fragmentClass, boolean initialTouchMode, boolean launchActivity) {
+    public FragmentTestRule(Class<A> activityClass, Class<F> fragmentClass, boolean initialTouchMode, boolean launchActivity) {
         super(activityClass, initialTouchMode, launchActivity);
         this.fragmentClass = fragmentClass;
     }

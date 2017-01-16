@@ -1,6 +1,7 @@
 package com.android21buttons.fragmenttestrule;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,14 +19,14 @@ public class FragmentTestRuleTest {
 
     @Test
     public void createFragment() throws Exception {
-        FragmentTestRule<?, Fragment> testRule = FragmentTestRule.create(Fragment.class);
+        FragmentTestRule<?, Fragment> testRule = new FragmentTestRule<>(FragmentActivity.class, Fragment.class);
 
         assertThat(testRule.createFragment(), is(notNullValue()));
     }
 
     @Test
     public void getFragmentCreate() throws Exception {
-        FragmentTestRule<?, Fragment> testRule = FragmentTestRule.create(Fragment.class);
+        FragmentTestRule<?, Fragment> testRule = new FragmentTestRule<>(FragmentActivity.class, Fragment.class);
 
         final Fragment fragment = testRule.createFragment();
         assertThat(testRule.getFragment(), is(fragment));
@@ -33,7 +34,7 @@ public class FragmentTestRuleTest {
 
     @Test
     public void getFragmentNoCreate() throws Exception {
-        FragmentTestRule<?, Fragment> testRule = FragmentTestRule.create(Fragment.class);
+        FragmentTestRule<?, Fragment> testRule = new FragmentTestRule<>(FragmentActivity.class, Fragment.class);
 
         assertThat(testRule.getFragment(), is(nullValue()));
     }

@@ -34,16 +34,20 @@ public class FragmentTestRule<A extends FragmentActivity, F extends Fragment> ex
 
     @Override
     protected void afterActivityLaunched() {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                FragmentTestRule.this.fragment = createFragment();
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(android.R.id.content, fragment)
-                        .commitNow();
-            }
-        });
+        try {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    FragmentTestRule.this.fragment = createFragment();
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(android.R.id.content, fragment)
+                            .commitNow();
+                }
+            });
+        } catch (Throwable throwable) {
+            throw new RuntimeException(throwable);
+        }
     }
 
     protected F createFragment() {

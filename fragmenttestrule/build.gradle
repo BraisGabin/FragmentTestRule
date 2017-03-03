@@ -25,7 +25,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-fragment:25.0.1'
+    compile 'com.android.support:support-fragment:25.2.0'
     compile 'com.android.support.test:rules:0.5'
     testCompile 'junit:junit:4.12'
 }

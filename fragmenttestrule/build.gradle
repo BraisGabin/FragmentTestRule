@@ -32,5 +32,6 @@ dependencies {
 
     androidTestCompile 'com.android.support:support-fragment:25.4.0'
     androidTestCompile 'com.android.support.test:rules:0.5'
-
 }
+
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

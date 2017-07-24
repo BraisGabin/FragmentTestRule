@@ -27,7 +27,6 @@ public class FragmentTestRule<A extends FragmentActivity, F extends Fragment> ex
      *                         targetPackage specified in the AndroidManifest.xml
      * @param fragmentClass    The fragment under test.
      * @see FragmentTestRule#FragmentTestRule(Class, Class, boolean)
-     * @see ActivityTestRule#ActivityTestRule(Class, boolean)
      */
     public FragmentTestRule(Class<A> activityClass, Class<F> fragmentClass) {
         this(activityClass, fragmentClass, false);
@@ -47,7 +46,6 @@ public class FragmentTestRule<A extends FragmentActivity, F extends Fragment> ex
      *                         targetPackage specified in the AndroidManifest.xml
      * @param fragmentClass    The fragment under test.
      * @param initialTouchMode true if the Activity should be placed into "touch mode" when started
-     * @see ActivityTestRule#ActivityTestRule(Class, boolean, boolean)
      * @see FragmentTestRule#FragmentTestRule(Class, Class, boolean, boolean)
      */
     public FragmentTestRule(Class<A> activityClass, Class<F> fragmentClass, boolean initialTouchMode) {
@@ -75,7 +73,6 @@ public class FragmentTestRule<A extends FragmentActivity, F extends Fragment> ex
      *                         <code>Before</code></a> method, and terminated after the last
      *                         <a href="http://junit.sourceforge.net/javadoc/org/junit/After.html">
      *                         <code>After</code></a> method.
-     * @see ActivityTestRule#ActivityTestRule(Class, boolean, boolean)
      * @see FragmentTestRule#FragmentTestRule(Class, Class, boolean, boolean, boolean)
      */
     public FragmentTestRule(Class<A> activityClass, Class<F> fragmentClass, boolean initialTouchMode, boolean launchActivity) {

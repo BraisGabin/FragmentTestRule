@@ -20,18 +20,90 @@ public class FragmentTestRule<A extends FragmentActivity, F extends Fragment> ex
     private final boolean launchFragment;
     private F fragment;
 
+    /**
+     * Similar to {@link #FragmentTestRule(Class, Class, boolean)} but with "touch mode" disabled.
+     *
+     * @param activityClass    The activity under test. This must be a class in the instrumentation
+     *                         targetPackage specified in the AndroidManifest.xml
+     * @param fragmentClass    The fragment under test.
+     * @see FragmentTestRule#FragmentTestRule(Class, Class, boolean)
+     * @see ActivityTestRule#ActivityTestRule(Class, boolean)
+     */
     public FragmentTestRule(Class<A> activityClass, Class<F> fragmentClass) {
         this(activityClass, fragmentClass, false);
     }
 
+    /**
+     * Similar to {@link #FragmentTestRule(Class, Class, boolean, boolean)} but defaults to launch
+     * the activity under test once per
+     * <a href="http://junit.org/javadoc/latest/org/junit/Test.html"><code>Test</code></a> method.
+     * It is launched before the first
+     * <a href="http://junit.sourceforge.net/javadoc/org/junit/Before.html"><code>Before</code></a>
+     * method, and terminated after the last
+     * <a href="http://junit.sourceforge.net/javadoc/org/junit/After.html"><code>After</code></a>
+     * method.
+     *
+     * @param activityClass    The activity under test. This must be a class in the instrumentation
+     *                         targetPackage specified in the AndroidManifest.xml
+     * @param fragmentClass    The fragment under test.
+     * @param initialTouchMode true if the Activity should be placed into "touch mode" when started
+     * @see ActivityTestRule#ActivityTestRule(Class, boolean, boolean)
+     * @see FragmentTestRule#FragmentTestRule(Class, Class, boolean, boolean)
+     */
     public FragmentTestRule(Class<A> activityClass, Class<F> fragmentClass, boolean initialTouchMode) {
         this(activityClass, fragmentClass, initialTouchMode, true);
     }
 
+    /**
+     * Similar to {@link #FragmentTestRule(Class, Class, boolean, boolean, boolean)} but defaults to
+     * launch the fragment under test once per
+     * <a href="http://junit.org/javadoc/latest/org/junit/Test.html"><code>Test</code></a> method.
+     * It is launched before the first
+     * <a href="http://junit.sourceforge.net/javadoc/org/junit/Before.html"><code>Before</code></a>
+     * method, and terminated after the last
+     * <a href="http://junit.sourceforge.net/javadoc/org/junit/After.html"><code>After</code></a>
+     * method.
+     *
+     * @param activityClass    The activity under test. This must be a class in the instrumentation
+     *                         targetPackage specified in the AndroidManifest.xml
+     * @param fragmentClass    The fragment under test.
+     * @param initialTouchMode true if the Activity should be placed into "touch mode" when started
+     * @param launchActivity   true if the Activity should be launched once per
+     *                         <a href="http://junit.org/javadoc/latest/org/junit/Test.html">
+     *                         <code>Test</code></a> method. It will be launched before the first
+     *                         <a href="http://junit.sourceforge.net/javadoc/org/junit/Before.html">
+     *                         <code>Before</code></a> method, and terminated after the last
+     *                         <a href="http://junit.sourceforge.net/javadoc/org/junit/After.html">
+     *                         <code>After</code></a> method.
+     * @see ActivityTestRule#ActivityTestRule(Class, boolean, boolean)
+     * @see FragmentTestRule#FragmentTestRule(Class, Class, boolean, boolean, boolean)
+     */
     public FragmentTestRule(Class<A> activityClass, Class<F> fragmentClass, boolean initialTouchMode, boolean launchActivity) {
         this(activityClass, fragmentClass, initialTouchMode, launchActivity, true);
     }
 
+    /**
+     * Creates an {@link FragmentTestRule} for the Fragment under test.
+     *
+     * @param activityClass    The activity under test. This must be a class in the instrumentation
+     *                         targetPackage specified in the AndroidManifest.xml
+     * @param fragmentClass    The fragment under test.
+     * @param initialTouchMode true if the Activity should be placed into "touch mode" when started
+     * @param launchActivity   true if the Activity should be launched once per
+     *                         <a href="http://junit.org/javadoc/latest/org/junit/Test.html">
+     *                         <code>Test</code></a> method. It will be launched before the first
+     *                         <a href="http://junit.sourceforge.net/javadoc/org/junit/Before.html">
+     *                         <code>Before</code></a> method, and terminated after the last
+     *                         <a href="http://junit.sourceforge.net/javadoc/org/junit/After.html">
+     *                         <code>After</code></a> method.
+     * @param launchFragment   true if the Fragment should be launched once per
+     *                         <a href="http://junit.org/javadoc/latest/org/junit/Test.html">
+     *                         <code>Test</code></a> method. It will be launched before the first
+     *                         <a href="http://junit.sourceforge.net/javadoc/org/junit/Before.html">
+     *                         <code>Before</code></a> method, and terminated after the last
+     *                         <a href="http://junit.sourceforge.net/javadoc/org/junit/After.html">
+     *                         <code>After</code></a> method.
+     */
     public FragmentTestRule(Class<A> activityClass, Class<F> fragmentClass, boolean initialTouchMode, boolean launchActivity, boolean launchFragment) {
         super(activityClass, initialTouchMode, launchActivity);
         this.fragmentClass = fragmentClass;
@@ -82,6 +154,14 @@ public class FragmentTestRule<A extends FragmentActivity, F extends Fragment> ex
         }
     }
 
+    /**
+     * Override this method to set up the desired Fragment.
+     * <p>
+     * The default Fragment (if this method returns null or is not overwritten) is:
+     * fragmentClass.newInstance()
+     *
+     * @return the fragment to test.
+     */
     protected F createFragment() {
         try {
             return fragmentClass.newInstance();
@@ -100,6 +180,9 @@ public class FragmentTestRule<A extends FragmentActivity, F extends Fragment> ex
         }
     }
 
+    /**
+     * @return The fragment under test.
+     */
     public F getFragment() {
         if (fragment == null) {
             Log.w(TAG, "Fragment wasn't created yet");

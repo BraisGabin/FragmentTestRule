@@ -27,10 +27,10 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
 
-    provided 'com.android.support:support-fragment:25.2.0'
+    provided 'com.android.support:support-fragment:25.4.0'
     provided 'com.android.support.test:rules:0.5'
 
-    androidTestCompile 'com.android.support:support-fragment:25.2.0'
+    androidTestCompile 'com.android.support:support-fragment:25.4.0'
     androidTestCompile 'com.android.support.test:rules:0.5'
 
 }

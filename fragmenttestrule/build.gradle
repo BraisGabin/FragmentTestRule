@@ -3,11 +3,11 @@ apply plugin: 'com.android.library'
 group='com.github.21Buttons'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion "26.0.0"
 
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -26,11 +26,11 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
 
-    provided 'com.android.support:support-fragment:25.4.0'
-    provided 'com.android.support.test:rules:0.5'
+    provided 'com.android.support:support-fragment:26.0.0'
+    provided 'com.android.support.test:rules:1.0.0'
 
-    androidTestCompile 'com.android.support:support-fragment:25.4.0'
-    androidTestCompile 'com.android.support.test:rules:0.5'
+    androidTestCompile 'com.android.support:support-fragment:26.0.0'
+    androidTestCompile 'com.android.support.test:rules:1.0.0'
 }
 
 apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

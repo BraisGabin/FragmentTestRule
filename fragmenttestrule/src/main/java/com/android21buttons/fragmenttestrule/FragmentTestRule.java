@@ -21,6 +21,57 @@ public class FragmentTestRule<A extends FragmentActivity, F extends Fragment> ex
     private F fragment;
 
     /**
+     * Creates an {@link FragmentTestRule} for the Fragment under test.
+     * <p>
+     * This factory uses a standard Activity to launch the fragment. If you need a special Activity
+     * use the constructors.
+     *
+     * @param fragmentClass The fragment under test
+     * @return the fragmentTestRule
+     * @see FragmentTestRule#FragmentTestRule(Class, Class)
+     */
+    public static <F extends Fragment> FragmentTestRule<?, F> create(Class<F> fragmentClass) {
+        return new FragmentTestRule<>(FragmentActivity.class, fragmentClass);
+    }
+
+    /**
+     * Creates an {@link FragmentTestRule} for the Fragment under test.
+     * <p>
+     * This factory uses a standard Activity to launch the fragment. If you need a special Activity
+     * use the constructors.
+     *
+     * @param fragmentClass    The fragment under test
+     * @param initialTouchMode true if the Activity should be placed into "touch mode" when started
+     * @return the fragmentTestRule
+     * @see FragmentTestRule#FragmentTestRule(Class, Class, boolean)
+     */
+    public static <F extends Fragment> FragmentTestRule<?, F> create(Class<F> fragmentClass, boolean initialTouchMode) {
+        return new FragmentTestRule<>(FragmentActivity.class, fragmentClass, initialTouchMode);
+    }
+
+    /**
+     * Creates an {@link FragmentTestRule} for the Fragment under test.
+     * <p>
+     * This factory uses a standard Activity to launch the fragment. If you need a special Activity
+     * use the constructors.
+     *
+     * @param fragmentClass    The fragment under test
+     * @param initialTouchMode true if the Activity should be placed into "touch mode" when started
+     * @param launchFragment   true if the Fragment should be launched once per
+     *                         <a href="http://junit.org/javadoc/latest/org/junit/Test.html">
+     *                         <code>Test</code></a> method. It will be launched before the first
+     *                         <a href="http://junit.sourceforge.net/javadoc/org/junit/Before.html">
+     *                         <code>Before</code></a> method, and terminated after the last
+     *                         <a href="http://junit.sourceforge.net/javadoc/org/junit/After.html">
+     *                         <code>After</code></a> method.
+     * @return the fragmentTestRule
+     * @see FragmentTestRule#FragmentTestRule(Class, Class, boolean, boolean, boolean)
+     */
+    public static <F extends Fragment> FragmentTestRule<?, F> create(Class<F> fragmentClass, boolean initialTouchMode, boolean launchFragment) {
+        return new FragmentTestRule<>(FragmentActivity.class, fragmentClass, initialTouchMode, true, launchFragment);
+    }
+
+    /**
      * Similar to {@link #FragmentTestRule(Class, Class, boolean)} but with "touch mode" disabled.
      *
      * @param activityClass The container activity for the fragment under test. This must be a class

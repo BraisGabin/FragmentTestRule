@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class FragmentA extends Fragment {
+public class FragmentWithActivityDependency extends Fragment {
 
     @Nullable
     @Override
@@ -19,10 +19,14 @@ public class FragmentA extends Fragment {
         view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                textView.setText(R.string.button_clicked);
+                textView.setText(((TextInterface) getActivity()).getText());
             }
         });
 
         return view;
+    }
+
+    public interface TextInterface {
+        String getText();
     }
 }

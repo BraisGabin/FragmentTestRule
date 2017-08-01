@@ -1,1 +1,1 @@
-include ':fragmenttestrule'
+include ':fragmenttestrule', ':sample'

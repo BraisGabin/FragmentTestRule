@@ -1,7 +1,5 @@
 apply plugin: 'com.android.library'
 
-group='com.github.21Buttons'
-
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.0"

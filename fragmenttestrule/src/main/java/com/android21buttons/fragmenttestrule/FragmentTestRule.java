@@ -10,8 +10,8 @@ import android.util.Log;
  * <p>
  * Idea extracted from: http://stackoverflow.com/a/38393087/842697
  *
- * @param <A> The activity where the fragment will be added
- * @param <F> The fragment to test
+ * @param <A> The container activity for the fragment under test
+ * @param <F> The fragment under test
  */
 public class FragmentTestRule<A extends FragmentActivity, F extends Fragment> extends ActivityTestRule<A> {
     private static final String TAG = "FragmentTestRule";
@@ -23,9 +23,10 @@ public class FragmentTestRule<A extends FragmentActivity, F extends Fragment> ex
     /**
      * Similar to {@link #FragmentTestRule(Class, Class, boolean)} but with "touch mode" disabled.
      *
-     * @param activityClass    The activity under test. This must be a class in the instrumentation
-     *                         targetPackage specified in the AndroidManifest.xml
-     * @param fragmentClass    The fragment under test.
+     * @param activityClass The container activity for the fragment under test. This must be a class
+     *                      in the instrumentation targetPackage specified in the
+     *                      AndroidManifest.xml
+     * @param fragmentClass The fragment under test
      * @see FragmentTestRule#FragmentTestRule(Class, Class, boolean)
      */
     public FragmentTestRule(Class<A> activityClass, Class<F> fragmentClass) {
@@ -42,9 +43,10 @@ public class FragmentTestRule<A extends FragmentActivity, F extends Fragment> ex
      * <a href="http://junit.sourceforge.net/javadoc/org/junit/After.html"><code>After</code></a>
      * method.
      *
-     * @param activityClass    The activity under test. This must be a class in the instrumentation
-     *                         targetPackage specified in the AndroidManifest.xml
-     * @param fragmentClass    The fragment under test.
+     * @param activityClass    The container activity for the fragment under test. This must be a
+     *                         class in the instrumentation targetPackage specified in the
+     *                         AndroidManifest.xml
+     * @param fragmentClass    The fragment under test
      * @param initialTouchMode true if the Activity should be placed into "touch mode" when started
      * @see FragmentTestRule#FragmentTestRule(Class, Class, boolean, boolean)
      */
@@ -62,9 +64,10 @@ public class FragmentTestRule<A extends FragmentActivity, F extends Fragment> ex
      * <a href="http://junit.sourceforge.net/javadoc/org/junit/After.html"><code>After</code></a>
      * method.
      *
-     * @param activityClass    The activity under test. This must be a class in the instrumentation
-     *                         targetPackage specified in the AndroidManifest.xml
-     * @param fragmentClass    The fragment under test.
+     * @param activityClass    The container activity for the fragment under test. This must be a
+     *                         class in the instrumentation targetPackage specified in the
+     *                         AndroidManifest.xml
+     * @param fragmentClass    The fragment under test
      * @param initialTouchMode true if the Activity should be placed into "touch mode" when started
      * @param launchActivity   true if the Activity should be launched once per
      *                         <a href="http://junit.org/javadoc/latest/org/junit/Test.html">
@@ -82,9 +85,10 @@ public class FragmentTestRule<A extends FragmentActivity, F extends Fragment> ex
     /**
      * Creates an {@link FragmentTestRule} for the Fragment under test.
      *
-     * @param activityClass    The activity under test. This must be a class in the instrumentation
-     *                         targetPackage specified in the AndroidManifest.xml
-     * @param fragmentClass    The fragment under test.
+     * @param activityClass    The container activity for the fragment under test. This must be a
+     *                         class in the instrumentation targetPackage specified in the
+     *                         AndroidManifest.xml
+     * @param fragmentClass    The fragment under test
      * @param initialTouchMode true if the Activity should be placed into "touch mode" when started
      * @param launchActivity   true if the Activity should be launched once per
      *                         <a href="http://junit.org/javadoc/latest/org/junit/Test.html">
@@ -129,6 +133,7 @@ public class FragmentTestRule<A extends FragmentActivity, F extends Fragment> ex
      *        fragmentRule.launchFragment(fragment);
      *    }
      * </pre>
+     *
      * @param fragment The Fragment under test. If {@code fragment} is null, the fragment returned
      *                 by {@link FragmentTestRule#createFragment()} is used.
      * @see FragmentTestRule#createFragment()

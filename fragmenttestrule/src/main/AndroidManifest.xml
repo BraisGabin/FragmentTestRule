@@ -3,6 +3,8 @@
     package="com.android21buttons.fragmenttestrule">
 
     <application>
-        <activity android:name="android.support.v4.app.FragmentActivity" />
+        <activity
+            android:name="android.support.v4.app.FragmentActivity"
+            android:theme="@style/Theme.AppCompat.Light" />
     </application>
 </manifest>

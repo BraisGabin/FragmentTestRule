@@ -25,6 +25,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     provided "com.android.support:support-fragment:$support_version"
+    compile "com.android.support:appcompat-v7:$support_version"
     provided 'com.android.support.test:rules:1.0.0'
 
     androidTestCompile "com.android.support:support-fragment:$support_version"

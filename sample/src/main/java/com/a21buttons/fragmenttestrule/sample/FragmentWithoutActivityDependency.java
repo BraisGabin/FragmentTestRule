@@ -10,11 +10,13 @@ import android.widget.TextView;
 
 public class FragmentWithoutActivityDependency extends Fragment {
 
+    private TextView textView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_a, container, false);
-        final TextView textView = view.findViewById(R.id.textView);
+        textView = view.findViewById(R.id.textView);
 
         view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -25,4 +27,9 @@ public class FragmentWithoutActivityDependency extends Fragment {
 
         return view;
     }
+
+    public void setText(String text) {
+        textView.setText(text);
+    }
+
 }

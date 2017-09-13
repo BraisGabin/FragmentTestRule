@@ -1,5 +1,7 @@
 package com.android21buttons.fragmenttestrule;
 
+import android.app.Instrumentation;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -18,6 +20,7 @@ public class FragmentTestRule<A extends FragmentActivity, F extends Fragment> ex
 
     private final Class<F> fragmentClass;
     private final boolean launchFragment;
+    private final Instrumentation instrumentation;
     private F fragment;
 
     /**
@@ -160,6 +163,7 @@ public class FragmentTestRule<A extends FragmentActivity, F extends Fragment> ex
         super(activityClass, initialTouchMode, launchActivity);
         this.fragmentClass = fragmentClass;
         this.launchFragment = launchFragment;
+        this.instrumentation = InstrumentationRegistry.getInstrumentation();
     }
 
     @Override
@@ -242,4 +246,45 @@ public class FragmentTestRule<A extends FragmentActivity, F extends Fragment> ex
         }
         return fragment;
     }
+
+    /**
+     * Helper method that allows to call methods on your fragment under test.
+     * <p>
+     * Internally it calls {@link Instrumentation#runOnMainSync(Runnable)}, executing the method {@link Runner#run(Object)} with the
+     * fragment under test as the parameter.
+     * <p>
+     * Usage example:
+     * <pre>
+     *    &#064;Test
+     *    public void testShowProgress() throws Exception {
+     *        fragmentTestRule.runOnMainSync(fragment -> fragment.showProgress());
+     *        onView(withId(R.id.progress)).check(matches(isDisplayed()));
+     *    }
+     * </pre>
+     * @param runner the object whose run method will be invoked with the fragment under test
+     * @see Instrumentation#runOnMainSync(Runnable)
+     */
+    public void runOnMainSync(final Runner<F> runner) {
+        instrumentation.runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                F fragment = getFragment();
+                runner.run(fragment);
+            }
+        });
+    }
+
+    /**
+     * Interface definition for a callback to be passed and invoked into {@link #runOnMainSync(Runner)}.
+     * @param <F> The fragment under test
+     * @see #runOnMainSync(Runner)
+     */
+    public interface Runner<F> {
+        /**
+         * This method will be called when an object implementing the interface {@link Runner} is passed to {@link #runOnMainSync(Runner)}.
+         * @param fragment the fragment under test
+         */
+        void run(F fragment);
+    }
+
 }

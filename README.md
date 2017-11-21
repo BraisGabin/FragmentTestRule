@@ -5,7 +5,7 @@ Test `Fragment`s in isolation.
 ## Download
 
 ```gradle
-debugCompile 'com.21buttons:fragment-test-rule:1.0.0'
+debugImplementation 'com.21buttons:fragment-test-rule:1.0.0'
 ```
 
 ## Usage

@@ -21,12 +21,12 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile project(':fragmenttestrule')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation project(':fragmenttestrule')
 
-    androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.1', {
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile "com.android.support:support-fragment:$support_version"
-    testCompile 'junit:junit:4.12'
+    implementation "com.android.support:support-fragment:$support_version"
+    testImplementation 'junit:junit:4.12'
 }

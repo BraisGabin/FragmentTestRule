@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Fragment Test Rule Sample</string>
+
     <string name="button">Button</string>
     <string name="button_clicked">Button clicked</string>
 </resources>

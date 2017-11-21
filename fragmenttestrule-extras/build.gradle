@@ -1,11 +1,10 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.3"
 
     defaultConfig {
-        applicationId "com.android21buttons.fragmenttestrule.sample"
         minSdkVersion 14
         targetSdkVersion 26
         versionCode 1
@@ -23,13 +22,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation "com.android.support:appcompat-v7:$support_version"
-
-    androidTestImplementation project(':fragmenttestrule')
-    debugImplementation project(':fragmenttestrule-extras')
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    testImplementation 'junit:junit:4.12'
 }
+
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

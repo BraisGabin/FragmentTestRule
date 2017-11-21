@@ -1,4 +1,4 @@
-package com.a21buttons.fragmenttestrule.sample;
+package com.android21buttons.fragmenttestrule.sample;
 
 import com.android21buttons.fragmenttestrule.FragmentTestRule;
 

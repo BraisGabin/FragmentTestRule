@@ -1,4 +1,4 @@
-package com.a21buttons.fragmenttestrule.sample;
+package com.android21buttons.fragmenttestrule.sample;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -25,10 +25,10 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     provided "com.android.support:support-fragment:$support_version"
-    provided 'com.android.support.test:rules:1.0.0'
+    provided 'com.android.support.test:rules:1.0.1'
 
     androidTestCompile "com.android.support:support-fragment:$support_version"
-    androidTestCompile 'com.android.support.test:rules:1.0.0'
+    androidTestCompile 'com.android.support.test:rules:1.0.1'
 }
 
 apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

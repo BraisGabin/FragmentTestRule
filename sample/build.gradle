@@ -24,7 +24,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile project(':fragmenttestrule')
 
-    androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.0', {
+    androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile "com.android.support:support-fragment:$support_version"

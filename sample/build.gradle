@@ -33,7 +33,8 @@ dependencies {
 
     androidTestImplementation project(':fragmenttestrule')
     debugImplementation project(':fragmenttestrule-extras')
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
+    implementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testImplementation 'junit:junit:4.12'

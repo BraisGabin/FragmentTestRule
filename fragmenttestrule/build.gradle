@@ -30,10 +30,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     compileOnly "com.android.support:support-fragment:$support_version"
-    compileOnly 'com.android.support.test:rules:1.0.1'
+    compileOnly 'com.android.support.test:rules:1.0.2'
 
     androidTestImplementation "com.android.support:support-fragment:$support_version"
-    androidTestImplementation 'com.android.support.test:rules:1.0.1'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
 }
 
 apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

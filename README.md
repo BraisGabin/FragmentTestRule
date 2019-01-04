@@ -5,9 +5,11 @@ Test `Fragment`s in isolation.
 ## Download
 
 ```gradle
-androidTestImplementation 'com.21buttons:fragment-test-rule:1.1.0'
-debugImplementation 'com.21buttons:fragment-test-rule-extras:1.1.0'
+androidTestImplementation 'com.21buttons:fragment-test-rule:2.0.0'
+debugImplementation 'com.21buttons:fragment-test-rule-extras:2.0.0'
 ```
+
+Note: If you don't support AndroidX yet use the version `1.1.0`.
 
 ## Usage
 

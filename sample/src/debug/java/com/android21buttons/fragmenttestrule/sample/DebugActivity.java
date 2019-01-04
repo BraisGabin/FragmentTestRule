@@ -1,6 +1,6 @@
 package com.android21buttons.fragmenttestrule.sample;
 
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.FragmentActivity;
 
 public class DebugActivity extends FragmentActivity implements FragmentWithActivityDependency.TextInterface {
     @Override

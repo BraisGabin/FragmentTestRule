@@ -1,7 +1,12 @@
 Change Log
 ==========
 
-Version 2.0.0 *(2018-01-04)*
+Version 2.0.1 *(2019-01-09)*
+----------------------------
+
+* No changes, just upload again to maven central.
+
+Version 2.0.0 *(2019-01-04)*
 ----------------------------
 
 Migrate to AndroidX
